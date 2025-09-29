@@ -1,23 +1,21 @@
 <template>
   <div class="app">
     <TopCounter />
-
-    <VillagersArea />
-
     <div class="main-area">
-      <Gauge />
+      <ClickGoals />
       <ChickenArea />
       <Shop />
     </div>
+    <VillagersArea />
   </div>
 </template>
 
 <script setup>
 import TopCounter from './components/TopCounter.vue';
 import VillagersArea from './components/VillagersArea.vue';
-import Gauge from './components/Gauge.vue';
 import ChickenArea from './components/ChickenArea.vue';
 import Shop from './components/Shop.vue';
+import ClickGoals from './components/ClickGoals.vue';
 </script>
 
 <style>
@@ -41,8 +39,8 @@ body {
 .main-area {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 20px;
+  align-items: flex-start;
+  gap: 40px;
   height: 75vh;
   padding-bottom: 20px;
 }

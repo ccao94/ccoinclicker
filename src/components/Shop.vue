@@ -6,7 +6,7 @@
         v-for="item in store.upgrades"
         :key="item.key"
         class="shop-card"
-        :class="{ highlight: store.emeralds >= item.cost }"
+        :class="[item.key === 10 ? 'multiplier-card' : '', store.emeralds >= item.cost ? 'highlight' : '']"
         @click="store.buyUpgrade(item.key)"
       >
         <div class="card-left">
@@ -15,9 +15,9 @@
         <div class="card-right">
           <div class="card-title">
             {{ item.title }}
-            <span class="owned-count">x{{ item.count.toString() }}</span>
+            <span class="owned-count" v-if="item.count">x{{ item.count.toString() }}</span>
           </div>
-          <div class="card-desc">{{ item.desc }} points/sec</div>
+          <div class="card-desc">{{ item.desc }}{{ item.perSecond > 0 ? ' points/sec' : '' }}</div>
           <div class="card-cost">
             <img src="/emerald.png" class="emerald-icon-small"/>
             {{ formatBigInt(item.cost) }}
@@ -30,13 +30,10 @@
 
 <script setup>
 import { useGameStore } from '../stores/game';
-
 const store = useGameStore();
 
 function formatBigInt(n) {
-  return typeof n === 'bigint'
-    ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-    : n;
+  return typeof n === 'bigint' ? n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : n;
 }
 </script>
 
@@ -85,6 +82,10 @@ function formatBigInt(n) {
 .shop-card:hover {
   transform: scale(1.02);
   box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+}
+.multiplier-card {
+  background: rgba(0,0,0,0.6);
+  border: 2px solid gold;
 }
 .highlight {
   animation: pulse 1s infinite;

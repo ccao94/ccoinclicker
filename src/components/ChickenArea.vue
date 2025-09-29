@@ -52,7 +52,7 @@ onMounted(() => {
   justify-content: center;
   align-items: flex-end;
   position: relative;
-  height: 500px;
+  height: 600px;
 }
 .chicken {
   width: 700px;
